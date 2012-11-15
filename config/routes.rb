@@ -1,9 +1,9 @@
 Peterkimblog::Application.routes.draw do
-  get "pages/home"
-  get "pages/help"
-  get "pages/about"
-  get "pages/contact" 
-  
+  root to: 'pages#home'
+  match '/help', to:'pages#help'
+  match '/about', to:'pages#about'
+  match '/contact', to:'pages#contact'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
