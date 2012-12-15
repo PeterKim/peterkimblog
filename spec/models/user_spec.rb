@@ -2,17 +2,19 @@
 #
 # Table name: users
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  email      :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  email           :string(255)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  password_digest :string(255)
 #
 
 require 'spec_helper'
 
 describe User do
-  before { @user = User.new(name:"example", email:"example@yahoo.com", password: "1234", password_confirmation: "1234") }
+  before { @user = User.new(name:"example", email:"example@yahoo.com",
+                            password: "1234", password_confirmation: "1234") }
   subject { @user }
 
   it { should respond_to(:name) }
@@ -76,5 +78,21 @@ describe User do
   describe "password shouldn't be too short" do
     before { @user.password = @user.password_confirmation = "a" * 5 }
     it { should_not be_valid }
+  end
+  
+  describe "authenticate returned" do
+    before { @user.save }
+    let(:found_user) { User.find_by_email(@user.email) }
+    
+    describe "valid password provided" do
+      it { should == found_user.authenticate(@user.password) }
+    end
+    
+    describe "invalid password provided" do
+      let(:authenticate_invalid_password) { found_user.authenticate("blah") }
+      
+      it { should_not == authenticate_invalid_password }
+      specify { authenticate_invalid_password.should be_false } 
+    end
   end
 end
