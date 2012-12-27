@@ -28,21 +28,13 @@ describe User do
   
   it { should be_valid }
 
-  describe "when name is not present" do
-    before { @user.name = nil }
-    it {should_not be_valid }
-  end
-
+  #################################################################
+  # email validation
   describe "when email is not present" do
     before { @user.email = nil }
     it {should_not be_valid }
   end
-  
-  describe "when name too long" do
-    before { @user.name = "a"*51 }
-    it {should_not be_valid }
-  end
-
+ 
   describe "testing invalid email addresses" do
     it "should be invalid" do
       addresses = %w[ petergmailcom peter@gmailcom @gmail.com peter@gmail. peter@.com]
@@ -61,7 +53,30 @@ describe User do
     end
     it { should_not be_valid }
   end
-  
+ 
+  describe "testing mixed case email" do
+    let(:mixed_case_email) { "PeterKim@yahoo.cOm" }
+    it "should downcast email before saving" do
+      @user.email = mixed_case_email
+      @user.save
+      @user.reload.email.should == mixed_case_email.downcase
+    end   
+  end
+
+  #################################################################
+  # name validation
+  describe "when name is not present" do
+    before { @user.name = nil }
+    it {should_not be_valid }
+  end
+ 
+  describe "when name too long" do
+    before { @user.name = "a"*51 }
+    it {should_not be_valid }
+  end
+
+  #################################################################
+  # password validation
   describe "password should not be blank" do
     before { @user.password = @user.password_confirmation = " "  }
     it { should_not be_valid }
