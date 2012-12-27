@@ -1,7 +1,12 @@
 Peterkimblog::Application.routes.draw do
-  get "users/new"
 
+  # resource
+  resources :users
+  
+  # root
   root to: 'pages#home'
+  
+  # match
   match '/help', to:'pages#help'
   match '/about', to:'pages#about'
   match '/contact', to:'pages#contact'
