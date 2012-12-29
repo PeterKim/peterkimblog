@@ -88,7 +88,13 @@ footer {
     color: $gray;
     &:hover {
       color: $grayDarker;	
-    }  		
+    }
+  }
+  .plain-link {
+    color: $grayLight;
+    &:hover {
+      text-decoration: none;
+    }
   }
   small {
     float:left;
