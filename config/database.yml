@@ -19,7 +19,7 @@ development:
   database: peterkimblog
   pool: 5
   username: <%= ENV['USERNAME'] %>
-  password: <%= ENV['USERNAME'] %>
+  password: 1234
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -46,7 +46,7 @@ test:
   database: peterkimblog_test
   pool: 5
   username: <%= ENV['USERNAME'] %>
-  password: <%= ENV['USERNAME'] %>
+  password: 1234
 
 production:
   adapter: postgresql
@@ -54,5 +54,5 @@ production:
   host: localhost
   database: peterkimblog_production
   pool: 5
-  username: <%= ENV['USERNAME'] %>
-  password: <%= ENV['USERNAME'] %>
+  username: <%= ENV['USERNAME'] || 'peterkimblog_prod' %>
+  password: <%= ENV['USERNAME'] || 'peterkimblog_prod' %>
