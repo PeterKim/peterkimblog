@@ -9,6 +9,7 @@
   </head>
   <body>
     <%= render 'layouts/header' %>
+    <%= get_heading(yield(:title)).html_safe %>
     <div class="container">
       <%= yield %>
       <%= render 'layouts/footer' %>

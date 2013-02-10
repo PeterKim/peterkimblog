@@ -9,7 +9,8 @@ module ApplicationHelper
   end
   
   def get_heading(page_title)
-    if page_title != "Home"
+    pages_w_header = %w{Help About Contact Sign\ up}
+    if pages_w_header.include?(page_title)   
       "<div class=\"center\"><h1>#{page_title}</h1></div>"
     else
       ""
