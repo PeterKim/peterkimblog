@@ -28,6 +28,19 @@ describe "UserPages" do
       end
     end
 
+    describe "with invalid password values" do
+      before do
+        fill_in "Name", with:"Example User"
+        fill_in "Email", with:"user@example.com"
+        fill_in "Password", with:"abc"
+        fill_in "Password_confirmation", with:"abc"
+      end
+    
+      it "should increase User.count by one" do
+        expect { click_button submit }.to change(User, :count).by(1)
+      end
+    end
+
     describe "with valid field values" do
       before do
         fill_in "Name", with:"Example User"
