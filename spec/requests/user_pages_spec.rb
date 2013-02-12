@@ -1,3 +1,4 @@
+
 require 'spec_helper'
 
 describe "UserPages" do
@@ -30,23 +31,23 @@ describe "UserPages" do
 
     describe "with invalid password values" do
       before do
-        fill_in "Name", with:"Example User"
-        fill_in "Email", with:"user@example.com"
-        fill_in "Password", with:"abc"
-        fill_in "Password_confirmation", with:"abc"
+        fill_in "Name", with: "Example User"
+        fill_in "Email", with: "user@example.com"
+        fill_in "Password", with: "abc"
+        fill_in "Confirmation", with: "abc"
       end
     
-      it "should increase User.count by one" do
-        expect { click_button submit }.to change(User, :count).by(1)
+      it "should not increase User.count by one" do
+        expect { click_button submit }.not_to change(User, :count).by(1)
       end
     end
 
     describe "with valid field values" do
       before do
-        fill_in "Name", with:"Example User"
-        fill_in "Email", with:"user@example.com"
-        fill_in "Password", with:"abcdefg"
-        fill_in "Password_confirmation", with:"abcdefg"
+        fill_in "Name", with: "Example User"
+        fill_in "Email", with: "user@example.com"
+        fill_in "Password", with: "abcdefg"
+        fill_in "Confirmation", with: "abcdefg"
       end
     
       it "should increase User.count by one" do
