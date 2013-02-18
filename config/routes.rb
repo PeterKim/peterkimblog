@@ -2,6 +2,7 @@ Peterkimblog::Application.routes.draw do
 
   # resource
   resources :users
+  resources :sessions, only: [:new, :create, :destory] 
   
   # root
   root to: 'pages#home'
@@ -11,6 +12,8 @@ Peterkimblog::Application.routes.draw do
   match '/about', to:'pages#about'
   match '/contact', to:'pages#contact'
   match '/signup', to:'users#new'
+  match '/signin', to:'sessions#new'
+  match '/signout', to:'sessions#destory', via: :delete
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
