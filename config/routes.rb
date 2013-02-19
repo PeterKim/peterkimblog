@@ -8,10 +8,12 @@ Peterkimblog::Application.routes.draw do
   root to: 'pages#home'
   
   # match
+  match '/signup', to:'users#new'
+
   match '/help', to:'pages#help'
   match '/about', to:'pages#about'
   match '/contact', to:'pages#contact'
-  match '/signup', to:'users#new'
+
   match '/signin', to:'sessions#new'
   match '/signout', to:'sessions#destory', via: :delete
 
