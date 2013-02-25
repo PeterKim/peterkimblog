@@ -1,4 +1,3 @@
-
 require 'spec_helper'
 
 describe "UserPages" do
@@ -59,11 +58,14 @@ describe "UserPages" do
         fill_in "Confirmation", with: "abcdefg"
       end
       
-      before { click_button submit }
-      let(:user) {User.find_by_email("user@example.com")}
+      describe "after saving the user" do
+        before { click_button submit }
+        let(:user) {User.find_by_email("user@example.com")}
       
-      it { should have_selector("title",text: user.name) }
-      it { should have_selector('div.alert.alert-success',text:'Welcome') }
+        it { should have_selector("title",text: user.name) }
+        it { should have_selector('div.alert.alert-success',text:'Welcome') }
+        it { should have_link('Sign out') }
+      end
     end
   end
 end
