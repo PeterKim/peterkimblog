@@ -18,26 +18,12 @@ describe "UserPages" do
   end
 
   describe "singup" do
-  
     before { visit signup_path }
     let(:submit) { "Create my account" }
     
     describe "with invalid field values" do
       it "should not create user" do
         expect { click_button submit }.not_to change(User, :count)
-      end
-    end
-
-    describe "with invalid password values" do
-      before do
-        fill_in "Name", with: "Example User"
-        fill_in "Email", with: "user@example.com"
-        fill_in "Password", with: "abc"
-        fill_in "Confirmation", with: "abc"
-      end
-    
-      it "should not increase User.count by one" do
-        expect { click_button submit }.not_to change(User, :count).by(1)
       end
     end
 
@@ -51,13 +37,8 @@ describe "UserPages" do
     end
     
     describe "with valid field values" do
-      before do
-        fill_in "Name", with: "Example User"
-        fill_in "Email", with: "user@example.com"
-        fill_in "Password", with: "abcdefg"
-        fill_in "Confirmation", with: "abcdefg"
-      end
-      
+      before { valid_sign_up "Peter Kim", "user@example.com" }
+
       describe "after saving the user" do
         before { click_button submit }
         let(:user) {User.find_by_email("user@example.com")}
