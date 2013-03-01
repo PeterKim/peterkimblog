@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def new
     @user = User.new
+    @submitLabel = "Create my account"
   end
   
   def show
@@ -16,5 +17,14 @@ class UsersController < ApplicationController
     else
       render 'new'
     end
-  end  
+  end
+  
+  def edit
+    @user = User.find(params[:id])
+    @submitLabel = "Save changes"
+  end
+  
+  def update
+    # put method
+  end
 end

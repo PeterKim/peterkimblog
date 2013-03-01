@@ -1,0 +1,8 @@
+<% provide(:title, "Edit User") %>
+<div class="row">
+  <div class="span6 offset3">
+    <%= render 'shared/user_form' %>
+    <%= gravatar_for @user %>
+    <a href="http://gravatar.com/emails">change</a>
+  </div>
+</div>

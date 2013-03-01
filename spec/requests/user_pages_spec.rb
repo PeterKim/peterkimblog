@@ -16,7 +16,8 @@ describe "UserPages" do
     it { should have_selector('h1', text: user.name) }
     it { should have_selector('title', text: user.name) }
   end
-
+  
+  # sign up
   describe "singup" do
     before { visit signup_path }
     let(:submit) { "Create my account" }
@@ -27,7 +28,6 @@ describe "UserPages" do
       end
     end
 
-    # test error messages 
     describe "with invalid submit" do
       before { click_button submit }
       it { should have_selector('title', text:'Sign up') }
@@ -47,6 +47,23 @@ describe "UserPages" do
         it { should have_selector('div.alert.alert-success',text:'Welcome') }
         it { should have_link('Sign out') }
       end
+    end
+  end
+  
+  #edit
+  describe "edit" do
+    let(:user) { FactoryGirl.create(:user) }
+    before { visit edit_user_path(user) }
+    
+    describe "page" do
+      it { should have_selector('h1', text: "Update your profile") }
+      it { should have_selector('title', text: "Edit User") }
+      it { should have_link('change', href: 'http://gravatar.com/emails') }
+    end
+    
+    describe "with invalid information" do
+      before { click_button "Save changes" }
+      it { should have_error_message('Invalid') }
     end
   end
 end
