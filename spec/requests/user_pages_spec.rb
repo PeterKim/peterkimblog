@@ -37,11 +37,11 @@ describe "UserPages" do
     end
     
     describe "with valid field values" do
-      before { valid_sign_up "Peter Kim", "user@example.com" }
+      before { valid_fill_user_form }
 
       describe "after saving the user" do
         before { click_button submit }
-        let(:user) {User.find_by_email("user@example.com")}
+        let(:user) { User.first }
       
         it { should have_selector("title",text: user.name) }
         it { should have_selector('div.alert.alert-success',text:'Welcome') }
@@ -63,7 +63,21 @@ describe "UserPages" do
     
     describe "with invalid information" do
       before { click_button "Save changes" }
-      it { should have_error_message('Invalid') }
+      it { should have_error_message('error') }
+    end
+    
+    describe "with valid infomation" do
+      before do 
+        valid_fill_user_form("Updated User", "updated@gmail.com") 
+        click_button "Save changes"
+      end
+      let(:updated_user) { User.first }
+      
+      it { should have_selector('title', text: updated_user.name) }
+      it { should have_selector('div.alert.alert-success') }
+      it { should have_link('Sign out', href: signout_path) } 
+      specify { user.reload.name.should == updated_user.name}
+      specify { user.reload.email.should == updated_user.email}
     end
   end
 end
