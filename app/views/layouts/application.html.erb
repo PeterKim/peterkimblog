@@ -6,8 +6,15 @@
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
+    
+    <%# extra routine to enable header dropdown-menu  %>
+    <script>
+      function enableHeaderDropdown() {
+        $('.dropdown-toggle').dropdown()
+      }
+    </script>
   </head>
-  <body>
+  <body onload="enableHeaderDropdown()">
     <%= render 'layouts/header' %>
     <%= get_heading(yield(:title),yield(:heading)).html_safe %>
     <div class="container">
