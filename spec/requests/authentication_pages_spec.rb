@@ -4,6 +4,7 @@ describe "AuthenticationPages" do
   
   subject { page }
   
+  # sign in
   describe "signin page" do 
     before { visit signin_path }
         
@@ -35,4 +36,22 @@ describe "AuthenticationPages" do
       end
     end
   end
+  
+  # authorization
+  describe "authorization" do
+    describe "for non-signin user" do
+      let(:user) { FactoryGirl.create(:user) }
+      
+      describe "visiting the edit page" do
+        before { visit edit_user_path(user) }
+        it { should have_selector('title', text: 'Sign in') }
+      end
+      
+      describe "submitting to update action" do
+        before { put user_path(user) } 
+        specify { response.should redirect_to(signin_path) }
+      end
+     
+    end
+  end 
 end
