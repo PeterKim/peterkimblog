@@ -41,6 +41,8 @@ describe "AuthenticationPages" do
   
   # authorization
   describe "authorization" do
+    
+    # preventing editing without sign-in
     describe "for non-signin user" do
       let(:user) { FactoryGirl.create(:user) }
       
@@ -53,7 +55,26 @@ describe "AuthenticationPages" do
         before { put user_path(user) } 
         specify { response.should redirect_to(signin_path) }
       end
-     
+    end
+    
+    # prevent other users to edit someone else's
+    describe "for wrong users" do
+      let(:user) { FactoryGirl.create(:user) }
+      let(:another_user) { 
+        FactoryGirl.create(:user, email: 'another@email.com') 
+      }
+      before { sign_in(user) }
+    
+      describe "visiting Users#edit" do
+        before { visit edit_user_path(another_user) }
+        it { should_not have_selector('h1',text: 'Update your profile')  }
+        it { should_not have_selector('title', text: /.*[|] Edit user/i) }
+      end
+      
+      describe "updating another user" do
+        before { put user_path(another_user) }
+        specify { response.should redirect_to(root_path) }
+      end     
     end
   end 
 end
