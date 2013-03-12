@@ -12,7 +12,7 @@ describe "AuthenticationPages" do
         visit signin_path
         click_button "Sign in"  
       }
-    
+      
       it { should have_selector('title', text: 'Sign in') }
       it { should have_error_message('Invalid') }
       
@@ -54,6 +54,20 @@ describe "AuthenticationPages" do
       describe "submitting to update action" do
         before { put user_path(user) } 
         specify { response.should redirect_to(signin_path) }
+      end
+      
+      describe "after signiin in" do
+        # signin manually to make sure that edit before sign-in rediredted
+        # user to sign in page
+        before do
+          visit edit_user_path(user)
+          fill_in "Email", with: user.email
+          fill_in "Password", with: user.password
+          click_button "Sign in"
+        end
+        it "should have rendered where user wanted to go initially" do 
+          page.should have_selector('title', text: /.*[|] Edit user/i) 
+        end
       end
     end
     
