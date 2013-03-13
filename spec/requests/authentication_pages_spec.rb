@@ -27,6 +27,7 @@ describe "AuthenticationPages" do
       before { sign_in(user) }
       
       it { should have_selector('title',text: user.name) }
+      it { should have_link('Users',href: users_path) }
       it { should have_link('Profile',href: user_path(user)) }
       it { should have_link('Settings',href: edit_user_path(user)) }
       it { should have_link('Sign out',href: signout_path) }
@@ -56,6 +57,12 @@ describe "AuthenticationPages" do
         specify { response.should redirect_to(signin_path) }
       end
       
+      # /users/index
+      describe "visiting the user index" do
+        before { visit users_path }
+        it { should have_selector('title',text: 'Sign in') }
+      end
+
       describe "after signiin in" do
         # signin manually to make sure that edit before sign-in rediredted
         # user to sign in page
