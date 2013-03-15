@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '3.2.12'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -10,6 +10,7 @@ gem 'pg'
 gem 'bootstrap-sass', '~> 2.3.0.1' 
 
 gem 'bcrypt-ruby', '3.0.1' 
+gem 'faker', '1.0.1'
 
 group :development, :test do
   gem 'rspec-rails', '2.11.0'
