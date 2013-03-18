@@ -8,8 +8,7 @@ module ApplicationHelper
     end
   end
   
-  def get_heading(page_title, page_heading)
-    heading = page_heading.empty?? page_title : page_heading
-    "<div class=\"center\"><h1>#{heading}</h1></div>"
+  def get_heading(page_heading)
+    page_heading.empty?? "<div></div>" : "<div class=\"center\"><h1>#{page_heading}</h1></div>"
   end
 end

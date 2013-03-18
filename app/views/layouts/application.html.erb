@@ -16,7 +16,7 @@
   </head>
   <body onload="enableHeaderDropdown()">
     <%= render 'layouts/header' %>
-    <%= get_heading(yield(:title),yield(:heading)).html_safe %>
+    <%= get_heading(yield(:heading)).html_safe %>
     <div class="container">
       <% flash.each do |key, value| %>
         <%= content_tag(:div, value, class: "alert alert-#{key}") %>
