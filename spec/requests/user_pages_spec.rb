@@ -7,13 +7,30 @@ describe "UserPages" do
   describe "index" do
     before {
       sign_in FactoryGirl.create(:user) 
-      FactoryGirl.create(:user, name: "Random User One",email: "randone@example.com")
-      FactoryGirl.create(:user, name: "Random User Two",email: "randtwo@example.com")
+      FactoryGirl.create(:user, 
+                         name: "Random User One",
+                         email: "randone@example.com")
+      FactoryGirl.create(:user, 
+                         name: "Random User Two",
+                         email: "randtwo@example.com")
       visit users_path
     }
+    
     it "Should list each user" do
       User.all.each do |user|
         page.should have_selector('li', text: user.name)
+      end
+    end
+    
+    describe "pagination" do
+      before(:all) { 30.times { FactoryGirl.create(:user) } }
+      after(:all) { User.delete_all }
+      
+      it { should have_selector('div.pagination') }
+      it "should list each user" do
+        User.paginate(page: 1).each do |user|
+          page.should have_selector('li',text: user.name)
+        end
       end
     end
   end
