@@ -26,10 +26,23 @@ describe User do
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:remember_token) }
+  it { should respond_to(:admin) }
   it { should respond_to(:authenticate) }
   
   it { should be_valid }
+  it { should_not be_admin }
 
+  #################################################################
+  # admin
+  describe "with admin attributes set to 'true'" do
+    before do
+      @user.save!
+      @user.toggle!(:admin)
+      
+      it { should be_admin }
+    end
+  end
+  
   #################################################################
   # email validation
   describe "when email is not present" do
@@ -115,6 +128,7 @@ describe User do
     end
   end
 
+  #################################################################
   # remember token
   describe "remember token" do
     before { @user.save }
