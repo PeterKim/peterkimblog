@@ -43,6 +43,19 @@ describe "AuthenticationPages" do
   # authorization
   describe "authorization" do
     
+    # admin user
+    describe "as non-admin user" do
+      let(:user) { FactoryGirl.create(:user) }
+      let(:non_admin) { FactoryGirl.create(:user) }
+      
+      before { sign_in non_admin }
+      
+      describe "submitting a delete request to the Users#destroy action do" do
+        before { delete user_path(user) }
+        specify { response.should redirect_to(root_path) }
+      end
+    end 
+    
     # preventing editing without sign-in
     describe "for non-signin user" do
       let(:user) { FactoryGirl.create(:user) }
