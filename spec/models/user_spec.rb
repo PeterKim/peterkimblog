@@ -40,6 +40,17 @@ describe User do
   end
 
   #################################################################
+  # admin
+  describe "with admin attributes set to 'true'" do
+    before do
+      @user.save!
+      @user.toggle!(:admin)
+      
+      it { should be_admin }
+    end
+  end
+  
+  #################################################################
   # email validation
   describe "when email is not present" do
     before { @user.email = nil }
@@ -124,6 +135,7 @@ describe User do
     end
   end
 
+  #################################################################
   # remember token
   describe "remember token" do
     before { @user.save }
