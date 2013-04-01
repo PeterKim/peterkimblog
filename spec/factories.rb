@@ -1,4 +1,6 @@
 FactoryGirl.define do
+  
+  # FactoryGirl.create(:user)
   factory :user do
     sequence(:name) { |n| "Person_#{n}" }
     sequence(:email) { |n| "Person_#{n}@example.com" }
@@ -9,5 +11,11 @@ FactoryGirl.define do
     factory :admin do
       admin true
     end
+  end
+  
+  # FactoryGirl.create(:micropost)
+  factory :micropost do
+    content "Lorem ipsum"
+    user
   end
 end
