@@ -74,3 +74,21 @@ Peterkimblog::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 end
+#== Route Map
+# Generated on 04 Apr 2013 16:20
+#
+#             POST   /users(.:format)          users#create
+#    new_user GET    /users/new(.:format)      users#new
+#   edit_user GET    /users/:id/edit(.:format) users#edit
+#        user GET    /users/:id(.:format)      users#show
+#             PUT    /users/:id(.:format)      users#update
+#             DELETE /users/:id(.:format)      users#destroy
+#    sessions POST   /sessions(.:format)       sessions#create
+# new_session GET    /sessions/new(.:format)   sessions#new
+#        root        /                         pages#home
+#      signup        /signup(.:format)         users#new
+#        help        /help(.:format)           pages#help
+#       about        /about(.:format)          pages#about
+#     contact        /contact(.:format)        pages#contact
+#      signin        /signin(.:format)         sessions#new
+#     signout DELETE /signout(.:format)        sessions#destory

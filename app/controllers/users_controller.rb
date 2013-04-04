@@ -35,6 +35,7 @@ class UsersController < ApplicationController
   # user GET /user/id
   def show
     @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
   
   # user PUT /user/id
