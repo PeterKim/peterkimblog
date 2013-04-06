@@ -35,7 +35,7 @@ class UsersController < ApplicationController
   # user GET /user/id
   def show
     @user = User.find(params[:id])
-    @microposts = @user.microposts.paginate(page: params[:page])
+    @microposts = @user.microposts.paginate(page: params[:page], per_page: 10)
   end
   
   # user PUT /user/id
@@ -63,13 +63,6 @@ class UsersController < ApplicationController
   def signed_out_user
     unless signed_out?
       redirect_to root_url
-    end
-  end
-  
-  def signed_in_user
-    unless signed_in?
-      store_location
-      redirect_to signin_url, notice: "Please sign in."
     end
   end
   

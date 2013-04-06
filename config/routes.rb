@@ -3,6 +3,7 @@ Peterkimblog::Application.routes.draw do
   # resource
   resources :users
   resources :sessions, only: [:new, :create, :destory] 
+  resources :microposts, only: [:create, :destroy]
   
   # root
   root to: 'pages#home'

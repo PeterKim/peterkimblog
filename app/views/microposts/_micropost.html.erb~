@@ -1,3 +1,0 @@
-<li>
-  <span class="content"><%= micropost.content %></span>
-</li>

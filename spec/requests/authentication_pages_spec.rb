@@ -60,7 +60,7 @@ describe "AuthenticationPages" do
       end
     end 
     
-    # preventing editing without sign-in
+    # preventing editing users without sign-in
     describe "for non-signin user" do
       let(:user) { FactoryGirl.create(:user) }
       
@@ -72,6 +72,19 @@ describe "AuthenticationPages" do
       describe "submitting to update action" do
         before { put user_path(user) } 
         specify { response.should redirect_to(signin_path) }
+      end
+      
+      # preventing creating/destroying microposts without signin
+      describe "in Microposts controller" do
+        describe "submitting to create action" do
+          before { post microposts_path }
+          specify { response.should redirect_to(signin_path) }
+        end
+        
+        describe "submitting to destroy action" do
+          before { delete micropost_path(FactoryGirl.create(:micropost)) }
+          specify { response.should redirect_to(signin_path) }
+        end
       end
       
       # /users/index
