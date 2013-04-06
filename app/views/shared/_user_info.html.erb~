@@ -1,8 +1,0 @@
-<a href="<%= user_path(current_user) %>">
-  <%= gravatar_for current_user, size: 52 %>
-</a>
-<h1>
-  
-</h1>
-<span></span>
-<span></span>
