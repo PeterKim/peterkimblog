@@ -64,6 +64,7 @@ describe "UserPages" do
     it { should have_selector('title', text: full_title('Sign up')) }
   end
 
+  # show
   describe "profile page" do
     let(:user) { FactoryGirl.create(:user) }
     let!(:m1) { FactoryGirl.create(:micropost, user: user, content:"Foo") }
@@ -78,6 +79,18 @@ describe "UserPages" do
       it { should have_content(m1.content) }
       it { should have_content(m2.content) }
       it { should have_content(user.microposts.count) }
+    end
+    
+    describe "pagination" do
+      before(:all) { 30.times { FactoryGirl.create(:micropost, user: user, content:'a') } }
+      after(:all) { user.microposts.delete_all }
+      
+      it { should have_selector('div.pagination') }
+      it "should list each micropost" do
+        user.microposts.paginate(page: 1, per_page: 10).each do |post|
+          page.should have_selector('li',text: post.content)
+        end
+      end
     end
   end
   

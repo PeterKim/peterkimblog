@@ -32,7 +32,7 @@ describe "Pages" do
         user.feed.each do |item|
           page.should have_selector("li##{item.id}", text: item.content)
         end
-      end
+      end    
     end
   end
 
