@@ -64,7 +64,7 @@ describe "UserPages" do
     it { should have_selector('title', text: full_title('Sign up')) }
   end
 
-  # show
+  # profile show
   describe "profile page" do
     let(:user) { FactoryGirl.create(:user) }
     let!(:m1) { FactoryGirl.create(:micropost, user: user, content:"Foo") }
