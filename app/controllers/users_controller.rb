@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-  include MicropostsHelper
-  
   before_filter :signed_out_user, only: [:new, :create]
   before_filter :signed_in_user, only: [:index, :edit, :update, :delete]
   before_filter :correct_user, only: [:edit, :update]

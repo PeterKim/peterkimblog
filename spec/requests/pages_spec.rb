@@ -16,7 +16,9 @@ describe "Pages" do
     it { should_not have_selector('title', text: ' | Home') }
     
     describe "for signed in users" do
-      let(:user) { FactoryGirl.create(:user) }
+      let(:user) { FactoryGirl.create(:user, 
+                                      name: "Random",
+                                      email: "rdm@gmail.com") }
       before do
         FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
         FactoryGirl.create(:micropost, user: user, content: "Dolor sit amet")

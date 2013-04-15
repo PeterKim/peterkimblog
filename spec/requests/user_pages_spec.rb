@@ -6,7 +6,9 @@ describe "UserPages" do
   
   describe "index" do
     before {
-      sign_in FactoryGirl.create(:user) 
+      sign_in FactoryGirl.create(:user, 
+                                 name: "Signed_in User", 
+                                 email: "signedin@gmail.com") 
       FactoryGirl.create(:user, 
                          name: "Random User One",
                          email: "randone@example.com")
@@ -23,7 +25,10 @@ describe "UserPages" do
     end
     
     describe "pagination" do
-      before(:all) { 30.times { FactoryGirl.create(:user) } }
+      before(:all) { 
+        User.delete_all
+        30.times { FactoryGirl.create(:user) } 
+      }
       after(:all) { User.delete_all }
       
       it { should have_selector('div.pagination') }
